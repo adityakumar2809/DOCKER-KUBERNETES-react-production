@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json ./
+RUN npm install
+
+COPY ./ ./
+
+CMD [ "npm", "run", "start" ]
+
+# docker run -it -p 3000:3000 -v /app/node_modules -v ${pwd}:/app IMAGE_ID
+# USE -v TO MAP VOLUMES IN ORDER TO REFLECT CHANGES MADE IN LOCAL FILE SYSTEM
+# -v ${pwd}:/app MAPS EVERYTHING IN PWD INSIDE APP FOLDER OF CONTAINER
+# -v /app/node_modules DEFINES A PLACEHOLDER FOR NODE MODULES AS THEY EXIST 
+# INSIDE CONTAINER BUT NOT IN PWD. ELSE IT WILL POINT TO NULL
