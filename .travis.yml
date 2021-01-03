@@ -1,5 +1,10 @@
 sudo: required
+language: generic
 services:
   - docker
+
 before_install:
   - docker build -t adityakumar2809/react-production -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true adityakumar2809/react-production npm run test
